@@ -33,6 +33,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656897932652:android:3bf07ab2fe3107d14d8749",
+        "android_client_info": {
+          "package_name": "com.example.vimigota"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656897932652-go62gh0h4b2tuvrvntm6bflr3eea1k3v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vimigota",
+            "certificate_hash": "6e5655c590ceb469a04a7c016ca4fba4cbedba5d"
+          }
+        },
+        {
+          "client_id": "656897932652-mruiut3q669ehjjgdom0ah9u89mlhv0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgnN5p3k028in8DoHDSkPgKABLQ4_AGyA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656897932652-mruiut3q669ehjjgdom0ah9u89mlhv0k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
