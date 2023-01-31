@@ -237,6 +237,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  tasty_toast:
+    dependency: "direct main"
+    description:
+      name: tasty_toast
+      sha256: e4f6ab9cf909f30c8bb809c181aee58817761486d5c528b1b41dfde44d36229f
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0"
   term_glyph:
     dependency: transitive
     description:

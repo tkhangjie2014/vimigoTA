@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'package:tasty_toast/tasty_toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vimigota/homepage.dart';
@@ -6,6 +7,8 @@ import 'package:vimigota/user_attendance.dart';
 import 'package:intl/intl.dart';
 
 class AddAttendance extends StatefulWidget {
+  const AddAttendance({super.key});
+
 
   @override
   State<AddAttendance> createState() => _AddAttendanceState();
@@ -22,7 +25,6 @@ class _AddAttendanceState extends State<AddAttendance> {
 
   @override
   Widget build(BuildContext context){
-    print(DateFormat('d-M-y H:m:s').parse(dtFormatted.toString()).millisecondsSinceEpoch);
     return Scaffold(
       appBar: AppBar(title: const Text('Add Attendance'),
         centerTitle: true,
@@ -40,7 +42,6 @@ class _AddAttendanceState extends State<AddAttendance> {
                 textInputType: TextInputType.number,
                 controller: phoneController),
 
-
                 Row(
                   children: [
                     ElevatedButton(
@@ -50,7 +51,20 @@ class _AddAttendanceState extends State<AddAttendance> {
                             phone: phoneController.text,
                             checkIn: dtFormatted,
                         );
+
                         addAttendanceAndNavigateHome(attendance, context);
+                        _onLoading();
+
+                        showToast(
+                          context,
+                          "${userController.text}'s attendance has been added",
+                          // Optional parameters:
+                          alignment: Alignment.bottomCenter,
+                          duration: const Duration(seconds: 3),
+                          padding: const EdgeInsets.all(25.0),
+                          offsetAnimationStart: const Offset(-0.1, -0.1),  // Defines the starting position of the fly-in animation
+                        );
+
 
                       },
                       child: const Text('Add')),
@@ -102,10 +116,28 @@ class _AddAttendanceState extends State<AddAttendance> {
       Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => const HomePage(),
           ),
           (route) => false,
       );
     });
+  }
+
+  void _onLoading() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              CircularProgressIndicator(),
+              Text("Loading"),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

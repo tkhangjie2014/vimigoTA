@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vimigota/details.dart';
@@ -13,11 +15,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = ScrollController();
   final CollectionReference _reference =
   FirebaseFirestore.instance.collection('userAttendance');
 
   bool isSearchClicked = false;
   String searchText = '';
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller.addListener(listenScrolling);
+  }
+
+  void listenScrolling() {
+    if (controller.position.atEdge) {
+      final isTop = controller.position.pixels == 0;
+
+      log(isTop as String);
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +66,7 @@ class _HomePageState extends State<HomePage> {
             },
           icon: Icon(isSearchClicked ? Icons.close : Icons.search))
         ],
+
       ),
       body: FutureBuilder<QuerySnapshot>(
         future: _reference.get(),
@@ -123,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
                     subtitle:
                     Column(
 
@@ -142,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -161,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 }),
 
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user,style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -180,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -199,7 +219,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -208,6 +228,7 @@ class _HomePageState extends State<HomePage> {
                 )
             );
           }
+
         }
     )
       :ListView.builder(
@@ -232,7 +253,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -251,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -270,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 }),
 
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -289,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
@@ -308,7 +329,7 @@ class _HomePageState extends State<HomePage> {
                             builder: (context) => Details(attendance: attendance[index])),
                       );
                     }),
-                    title: Text(attendance[index].user),
+                    title: Text(attendance[index].user, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                     subtitle:
                     Column(
 
