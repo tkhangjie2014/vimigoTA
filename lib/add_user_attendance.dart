@@ -1,8 +1,9 @@
+import 'dart:core';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vimigota/homepage.dart';
-import 'package:vimigota/main.dart';
 import 'package:vimigota/user_attendance.dart';
+import 'package:intl/intl.dart';
 
 class AddAttendance extends StatefulWidget {
 
@@ -13,11 +14,15 @@ class AddAttendance extends StatefulWidget {
 class _AddAttendanceState extends State<AddAttendance> {
   final TextEditingController userController = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
-  //final TextEditingController checkInController = TextEditingController();
-  final FocusNode focusNode = FocusNode();
+  final TextEditingController checkInController = TextEditingController();
+  //final FocusNode focusNode = FocusNode();
+
+  var dtFormatted = DateFormat('d-M-y H:m:s').format(DateTime.now());
+
 
   @override
   Widget build(BuildContext context){
+    print(DateFormat('d-M-y H:m:s').parse(dtFormatted.toString()).millisecondsSinceEpoch);
     return Scaffold(
       appBar: AppBar(title: const Text('Add Attendance'),
         centerTitle: true,
@@ -26,7 +31,7 @@ class _AddAttendanceState extends State<AddAttendance> {
         child: Column(
           children: [
             getMyField(
-                focusNode: focusNode,
+                //focusNode: focusNode,
                 hintText: 'Name',
                 textInputType: TextInputType.name,
                 controller: userController),
@@ -42,8 +47,8 @@ class _AddAttendanceState extends State<AddAttendance> {
                       onPressed: (){
                         Attendance attendance = Attendance(
                             user: userController.text,
-                            phone: num.parse(phoneController.text),
-                            checkIn: DateTime.now(),
+                            phone: phoneController.text,
+                            checkIn: dtFormatted,
                         );
                         addAttendanceAndNavigateHome(attendance, context);
 
@@ -56,7 +61,7 @@ class _AddAttendanceState extends State<AddAttendance> {
                       onPressed: (){
                         userController.text = '';
                         phoneController.text = '';
-                        focusNode.requestFocus();
+                        //focusNode.requestFocus();
                       },
                       child: const Text('Reset')),
                   ],
@@ -94,15 +99,13 @@ class _AddAttendanceState extends State<AddAttendance> {
     attendance.id = attendanceRef.id;
     final data = attendance.toJson();
     attendanceRef.set(data).whenComplete((){
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
-              builder: (context) => HomePage()));
-
-
+              builder: (context) => HomePage(),
+          ),
+          (route) => false,
+      );
     });
-
   }
-
-
 }

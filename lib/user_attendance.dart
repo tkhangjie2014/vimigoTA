@@ -14,18 +14,18 @@ class Attendance {
 
   String? id;
   final String user;
-  final num phone;
-  DateTime? checkIn;
+  final String phone;
+  String? checkIn;
 
   factory Attendance.fromJson(Map<String, dynamic> json) => Attendance(
     user: json["user"],
     phone: json["phone"],
-    checkIn: DateTime.parse(json["checkIn"]),
+    checkIn: json["checkIn"],
   );
 
   Map<String, dynamic> toJson() => {
     "user": user,
     "phone": phone,
-    "checkIn": checkIn?.toIso8601String(),
+    "checkIn": checkIn,
   };
 }

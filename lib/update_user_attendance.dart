@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:vimigota/homepage.dart';
@@ -18,7 +16,7 @@ class UpdateAttendance extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     userController.text = attendance.user;
-    phoneController.text = '${attendance.phone}';
+    phoneController.text = attendance.phone;
     //checkInController.text = '${attendance.checkIn}';
     return Scaffold(
       appBar: AppBar(title: const Text('Update Attendance'),
@@ -44,7 +42,7 @@ class UpdateAttendance extends StatelessWidget {
                     onPressed: (){
                       Attendance updatedAttendance = Attendance(
                           user: userController.text,
-                          phone: num.parse(phoneController.text));
+                          phone: phoneController.text);
 
                       final collectionReference =
                         FirebaseFirestore.instance.collection('userAttendance');
