@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:vimigota/details.dart';
@@ -23,22 +21,6 @@ class _HomePageState extends State<HomePage> {
   String searchText = '';
 
   @override
-  void initState() {
-    super.initState();
-
-    controller.addListener(listenScrolling);
-  }
-
-  void listenScrolling() {
-    if (controller.position.atEdge) {
-      final isTop = controller.position.pixels == 0;
-
-      log(isTop as String);
-
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -47,7 +29,7 @@ class _HomePageState extends State<HomePage> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
             child: TextField(
-              decoration: InputDecoration(hintText: 'Search...'),
+              decoration: const InputDecoration(hintText: 'Search...'),
               onChanged: (value){
                 setState(() {
                   searchText = value;
@@ -102,7 +84,7 @@ class _HomePageState extends State<HomePage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AddAttendance(),));
+                builder: (context) => const AddAttendance(),));
         }),
         child: const Icon(Icons.add),
       ),
@@ -148,7 +130,7 @@ class _HomePageState extends State<HomePage> {
                     Column(
 
                     ),
-                    trailing: Text('less than a min ago')
+                    trailing: const Text('less than a min ago')
                 )
             );
           }

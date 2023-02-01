@@ -1,15 +1,20 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vimigota/homepage.dart';
+import 'package:vimigota/onboarding.dart';
+
+var initScreen = 0 ;
 
 Future main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  initScreen = (await prefs.getInt("initScreen"))!;
+  await prefs.setInt("initScreen", 1);
+  log('initScreen ${initScreen}');
   runApp(const MyApp());
 }
 
@@ -24,7 +29,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      initialRoute: initScreen == 1 ? "first" : "/",
+      routes: {
+        '/': (context) => const HomePage(),
+        "first": (context) => const OnBoardingScreen(),
+      },
+      //home: const OnBoardingScreen(),
+      //const HomePage(),
     );
   }
 }

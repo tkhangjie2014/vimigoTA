@@ -43,8 +43,11 @@ class _AddAttendanceState extends State<AddAttendance> {
                 controller: phoneController),
 
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+
                     ElevatedButton(
+
                       onPressed: (){
                         Attendance attendance = Attendance(
                             user: userController.text,
